@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.DiaryEntity;
-import com.example.demo.entity.UserEntity;
 import com.example.demo.models.in.DiaryIn;
-import com.example.demo.models.in.UserIn;
 import com.example.demo.service.DiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalTime;
 
 @RestController
 public class DiaryController {
@@ -53,12 +50,12 @@ public class DiaryController {
 //        return diaryService.addInfoFavorite(id, userIn);
 //    }
 
-    @PostMapping("user")
-    public ResponseEntity<?> addInfoFavorites(@RequestHeader(name = "Authorization") String token) {
-        return diaryService.addInfoFavorites(token);
+    @PostMapping("favorites")
+    public ResponseEntity<?> createFavorites(@RequestHeader(name = "Authorization") String token) {
+        return diaryService.createFavorites(token);
     }
 
-    @GetMapping("user/{id}")
+    @GetMapping("filter/{id}")
     public ResponseEntity<?> getFilter(@PathVariable(name = "id") long id) {
         return diaryService.getFilter(id);
     }

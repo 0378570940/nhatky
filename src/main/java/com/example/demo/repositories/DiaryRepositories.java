@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface DiaryRepositories extends JpaRepository<DiaryEntity, Long> {
     DiaryEntity findAllById(long id);
 
-    DiaryEntity findAllByName(String name);
+    DiaryEntity findAllByTime(String time);
 
     DiaryEntity findByName(String name);
 }

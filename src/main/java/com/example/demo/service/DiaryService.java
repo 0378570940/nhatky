@@ -108,7 +108,7 @@ public class DiaryService {
     }
 
     //thêm nhật ký vào danh sách yêu thích
-    public ResponseEntity<?> addInfoFavorites(String token) {
+    public ResponseEntity<?> createFavorites(String token) {
         //lấy id theo token
         long userId = Long.parseLong(jwtLoginService.parseToken(token));
         //lấy thông tin token trong db
@@ -127,17 +127,13 @@ public class DiaryService {
 
     //lọc các nhật ký theo 1 chủ để
     public ResponseEntity<?> getFilter(long id) {
-        //lấy thông tin từ b
-        ThemeEntity themeEntity = themeRepositories.findAllByThemeId(id);
+        //lấy thông tin từ db
         DiaryEntity diaryEntity = diaryRepositories.findAllById(id);
         //ktra lếu có thì trả ra kq
-        if (themeEntity == null || diaryEntity == null)
+        if (diaryEntity == null)
             return new ResponseEntity<>("không có thông tin nào của nhật ký và hủ đề!", HttpStatus.OK);
         ThemeOut themeOut = new ThemeOut();
         DiaryDto diaryDto = mapper.mapFilter(diaryEntity);
-        themeOut.setThemeId(themeEntity.getThemeId());
-        themeOut.setDescription(themeEntity.getDescription());
-        themeOut.setThemename(themeEntity.getThemename());
         themeOut.setFilter(diaryDto);
         return new ResponseEntity<>(themeOut, HttpStatus.OK);
     }
